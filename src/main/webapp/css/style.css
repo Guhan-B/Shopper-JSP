@@ -30,14 +30,13 @@ input {
   width: 100%;
 }
 
-input:focus {
+input:focus, select:focus {
   border-color: rgba(116, 186, 255, 0.5);
   box-shadow: 0 0 0 3px rgba(116, 186, 255, 0.2);
 }
 
 label {
   font-size: 0.85rem;
-  font-weight: 500;
   margin-bottom: 0.5rem;
   font-weight: 600;
 }
@@ -53,6 +52,7 @@ label {
   border-radius: 2px;
   cursor: pointer;
   transition: 0.2s all ease-in-out;
+  text-decoration: none;
 }
 
 .button-primary:hover {
@@ -126,8 +126,11 @@ form .form-field {
   margin: auto;
 }
 
-.catalouge-page h2 {
+.catalouge-page header {
   margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .catalouge-page table {
@@ -229,10 +232,14 @@ form .form-field {
   background-color: #dfe6e9;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   width: fit-content;
   gap: 1rem;
   margin: auto;
+}
+
+.admin-page .admin-center form button {
+  width: 100%;
 }
 
 .admin-page .admin-center h2 {
@@ -294,4 +301,25 @@ form .form-field {
   border-radius: 2px;
   border: 1px solid #d63031;
   color: #d63031;
+}
+
+#admin-actions {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+#admin-actions form button {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: 0.2s all ease-in-out;
+  color: #555555;
+}
+
+#admin-actions form button:hover {
+  color: #036fc2;
 }
