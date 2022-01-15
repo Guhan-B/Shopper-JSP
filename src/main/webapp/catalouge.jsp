@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="Guhan@2001"/>
+    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="srijayan"/>
 
     <sql:query dataSource="${connection}" var="products">
         SELECT * from products;
@@ -59,6 +59,7 @@
                         <td><c:out value="${product.stock} ${product.unit}"/></td>
                         <td><c:out value="Rs. ${product.price} per ${product.per} ${product.unit}"/></td>
                         <td>
+                            <input type="number" hidden name="product-id" value="${product.id}">
                             <input style="width: 100px;text-align: center;" type="number" value="0" min="0" name="${product.id}">
                         </td>
                     </tr>

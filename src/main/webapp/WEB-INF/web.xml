@@ -25,6 +25,14 @@
     <servlet-name>Add</servlet-name>
     <servlet-class>AddServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Purchase</servlet-name>
+    <servlet-class>PurchaseServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Redirect</servlet-name>
+    <servlet-class>RedirectServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>Register</servlet-name>
@@ -45,5 +53,13 @@
   <servlet-mapping>
     <servlet-name>Add</servlet-name>
     <url-pattern>/add</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Purchase</servlet-name>
+    <url-pattern>/purchase</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Redirect</servlet-name>
+    <url-pattern>/redirect</url-pattern>
   </servlet-mapping>
 </web-app>
