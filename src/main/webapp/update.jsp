@@ -48,7 +48,7 @@
         </form>
     </header>
     <div class="add-page container">
-        <form method="post" action="add">
+        <form method="post" action="update">
             <h2>Edit Product</h2>
             <div class="form-field">
                 <label for="product-name">Product Name</label>
@@ -78,6 +78,9 @@
                 <label for="cost-per">Product cost for how many unit?</label>
                 <input required type="number" min="0" id="cost-per" name="cost-per" value="${product.rows[0].per}">
             </div>
+            <%
+                out.print("<input hidden type=\"text\" name=\"productID\" value=" + request.getParameter("productID") + ">");
+            %>
             <div class="controls">
                 <button class="button-primary" type="reset">Clear</button>
                 <button class="button-primary" type="submit">Save</button>

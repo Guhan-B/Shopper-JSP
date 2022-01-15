@@ -33,6 +33,10 @@
     <servlet-name>Redirect</servlet-name>
     <servlet-class>RedirectServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Update</servlet-name>
+    <servlet-class>UpdateServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>Register</servlet-name>
@@ -61,5 +65,9 @@
   <servlet-mapping>
     <servlet-name>Redirect</servlet-name>
     <url-pattern>/redirect</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Update</servlet-name>
+    <url-pattern>/update</url-pattern>
   </servlet-mapping>
 </web-app>
