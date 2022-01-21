@@ -1,3 +1,6 @@
+<%@ page import="Utility.Product" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Utility.Cart" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 
@@ -20,11 +23,34 @@
 </head>
 
 <body>
-    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="Guhan@2001"/>
+    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="Rajesh3@"/>
 
     <sql:query dataSource="${connection}" var="products">
         SELECT * FROM products WHERE name LIKE "%<c:out value="${param.search.trim()}"/>%"
     </sql:query>
+
+    <%
+        if(request.getParameter("product-id") != null || request.getParameter("product-name") != null ||
+                request.getParameter("product-price") != null || request.getParameter("product-stock") != null) {
+
+            int id = Integer.parseInt(request.getParameter("product-id"));
+            String name = request.getParameter("product-name");
+            int price = Integer.parseInt(request.getParameter("product-price"));
+            int stock = Integer.parseInt(request.getParameter("product-stock"));
+            Cart cart = new Cart(id, name, price, stock);
+
+            ArrayList<Cart> cartProducts;
+            if(session.getAttribute("cartProducts") == null) {
+                cartProducts = new ArrayList<>();
+                cartProducts.add(cart);
+            } else {
+                cartProducts = (ArrayList<Cart>)session.getAttribute("cartProducts");
+                cartProducts.add(cart);
+            }
+
+            session.setAttribute("cartProducts", cartProducts);
+        }
+    %>
 
     <header class="navbar">
         <h2>Shopper</h2>
@@ -47,39 +73,39 @@
             </form>
         </header>
 
-        <% if(request.getAttribute("isError") != null && (boolean) request.getAttribute("isError")) { %>
-        <div class="error-message">
-            <p><%= request.getAttribute("errorMessage") %></p>
-        </div>
-        <% } %>
+        <table id="customers">
+            <tr>
+                <th>Produce ID</th>
+                <th>Product Name</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Add</th>
+            </tr>
 
-        <form method="post" action="purchase">
-            <table id="customers">
+            <c:forEach var="product" items="${products.rows}">
                 <tr>
-                    <th>Produce ID</th>
-                    <th>Product Name</th>
-                    <th>Stock</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
+                    <td><c:out value="${product.id}"/></td>
+                    <td><c:out value="${product.name}"/></td>
+                    <td><c:out value="${product.stock} ${product.unit}"/></td>
+                    <td><c:out value="Rs. ${product.price} per ${product.per} ${product.unit}"/></td>
+                    <td>
+                        <form method="post" action="catalouge.jsp">
+                            <input type="number" hidden value="${product.id}" name="product-id" />
+                            <input type="text" hidden value="${product.name}" name="product-name" />
+                            <input type="number" hidden value="${product.stock}" name="product-stock" />
+                            <input type="number" hidden value="${product.price}" name="product-price" />
+                            <button class="button-primary">Add</button>
+                        </form>
+                    </td>
                 </tr>
+            </c:forEach>
+        </table>
 
-                <c:forEach var="product" items="${products.rows}">
-                    <tr>
-                        <td><c:out value="${product.id}"/></td>
-                        <td><c:out value="${product.name}"/></td>
-                        <td><c:out value="${product.stock} ${product.unit}"/></td>
-                        <td><c:out value="Rs. ${product.price} per ${product.per} ${product.unit}"/></td>
-                        <td>
-                            <input type="number" hidden name="product-id" value="${product.id}">
-                            <input style="width: 100px;text-align: center;" type="number" value="0" min="0" name="${product.id}">
-                        </td>
-                    </tr>
-                </c:forEach>
-            </table>
-            <div class="purchase-form">
-                <button class="button-primary">Purchase</button>
-            </div>
-        </form>
+        <div class="purchase-form">
+            <form action="addToCart.jsp">
+                <button class="button-primary">Go to Cart</button>
+            </form>
+        </div>
     </div>
 </body>
 

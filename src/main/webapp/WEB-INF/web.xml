@@ -37,6 +37,10 @@
     <servlet-name>Update</servlet-name>
     <servlet-class>UpdateServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Download</servlet-name>
+    <servlet-class>DownloadServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>Register</servlet-name>
@@ -70,4 +74,9 @@
     <servlet-name>Update</servlet-name>
     <url-pattern>/update</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Download</servlet-name>
+    <url-pattern>/download</url-pattern>
+  </servlet-mapping>
+
 </web-app>

@@ -76,11 +76,11 @@
 
         </span>
     </div>
-    <div style="display:flex;justify-content:center;margin-top:4rem;">
+    <div style="display:flex;justify-content:center;margin-top:4rem;gap: 1rem;">
         <form action="redirect">
             <button class="button-primary">Back to Home</button>
         </form>
-
+        <a class="button-primary" href=<%= "download?value=" + request.getAttribute("invoice") %>>Download Invoice</a>
     </div>
 </div>
 </body>
