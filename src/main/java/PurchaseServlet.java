@@ -1,4 +1,4 @@
-import Utility.CheckOut;
+import Utility.Checkout;
 import Utility.Database;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
@@ -25,8 +25,8 @@ public class PurchaseServlet extends HttpServlet {
                 });
     }
 
-    private void addRows(PdfPTable table, ArrayList<CheckOut> data) {
-        for(CheckOut p : data) {
+    private void addRows(PdfPTable table, ArrayList<Checkout> data) {
+        for(Checkout p : data) {
             table.addCell(Integer.toString(p.productId));
             table.addCell(p.productName);
             table.addCell(Integer.toString(p.quantity));
@@ -40,7 +40,7 @@ public class PurchaseServlet extends HttpServlet {
 
         Statement st;
         Connection connection;
-        ArrayList<CheckOut> products = new ArrayList<>();
+        ArrayList<Checkout> products = new ArrayList<>();
 
         try {
             req.setAttribute("isError", false);
@@ -49,7 +49,7 @@ public class PurchaseServlet extends HttpServlet {
             st = connection.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM products");
 
-            CheckOut.grandTotal=0;
+            Checkout.grandTotal=0;
 
             while(rs.next()) {
                 int productId = rs.getInt(1);
@@ -67,7 +67,7 @@ public class PurchaseServlet extends HttpServlet {
                     req.setAttribute("isError", true);
                     req.setAttribute("errorMessage", "Insufficient stocks for " + productName);
 
-                    RequestDispatcher dispatcher = req.getRequestDispatcher("addToCart.jsp");
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("cart.jsp");
                     dispatcher.forward(req, res);
 
                     return;
@@ -75,7 +75,7 @@ public class PurchaseServlet extends HttpServlet {
             }
 
             rs = st.executeQuery("SELECT * FROM products");
-            CheckOut.grandTotal=0;
+            Checkout.grandTotal=0;
 
             while (rs.next()) {
                 int productId = rs.getInt(1);
@@ -102,21 +102,20 @@ public class PurchaseServlet extends HttpServlet {
 
                     double priceOfOneProduct = price / (double) per;
                     double totalPrice = priceOfOneProduct * quantity;
-                    CheckOut.grandTotal += totalPrice;
-                    CheckOut product = new CheckOut(productId, productName, quantity, totalPrice);
+                    Checkout.grandTotal += totalPrice;
+                    Checkout product = new Checkout(productId, productName, quantity, totalPrice);
                     products.add(product);
                 }
             }
 
             double totalPrice = 0;
 
-            for(CheckOut p : products) {
+            for(Checkout p : products) {
                 totalPrice += p.price;
             }
 
             Document document = new Document();
-            File invoiceFile = File.createTempFile("shopper_invoice_", ".pdf", new File("D:\\5th Sem\\Java\\Shopper" +
-                    "-JSP\\invoice"));
+            File invoiceFile = File.createTempFile("shopper_invoice_", ".pdf", new File("D:\\projects\\Shopper-JSP\\src\\main\\webapp\\WEB-INF\\invoice"));
             String invoiceName = invoiceFile.getName();
             PdfWriter.getInstance(document, new FileOutputStream(invoiceFile));
 

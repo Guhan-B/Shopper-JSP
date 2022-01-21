@@ -1,4 +1,4 @@
-<%@ page import="Utility.CheckOut" %>
+<%@ page import="Utility.Checkout" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
@@ -49,7 +49,7 @@
 
         <%
             if(request.getAttribute("products") != null) {
-                ArrayList<CheckOut> products = (ArrayList<CheckOut>)request.getAttribute("products");
+                ArrayList<Checkout> products = (ArrayList<Checkout>)request.getAttribute("products");
                 for(int i=0; i<products.size(); i++) {
                     out.print("<tr>");
                     out.print("<td>" + products.get(i).productId + "</td>");
@@ -71,7 +71,7 @@
   box-shadow: 0 0 0 3px rgba(116, 186, 255, 0.2); border-radius: 4px"; >
 
              <%
-                 out.print("Rs. " + CheckOut.grandTotal );
+                 out.print("Rs. " + Checkout.grandTotal );
              %>
 
         </span>

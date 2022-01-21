@@ -73,7 +73,7 @@
                 %>
 
         </table>
-        <button class="button-primary">Purchase</button>
+        <button style="display: block; margin: 2rem 0 0 auto;" class="button-primary">Purchase</button>
     </form>
 
 </div>

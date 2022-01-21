@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="srijayan"/>
+    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="Guhan@2001"/>
 
     <sql:query dataSource="${connection}" var="products">
         SELECT * FROM products WHERE name LIKE "%<c:out value="${param.search.trim()}"/>%"
@@ -77,11 +77,11 @@
 
         <table id="customers">
             <tr>
-                <th>Produce ID</th>
+                <th>Product ID</th>
                 <th>Product Name</th>
                 <th>Stock</th>
                 <th>Price</th>
-                <th>Add</th>
+                <th>Action</th>
             </tr>
 
             <c:forEach var="product" items="${products.rows}">
@@ -106,7 +106,7 @@
         </table>
 
         <div class="purchase-form">
-            <form action="addToCart.jsp">
+            <form action="cart.jsp">
                 <button class="button-primary">Go to Cart</button>
             </form>
         </div>

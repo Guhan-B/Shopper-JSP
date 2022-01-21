@@ -3,33 +3,31 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class DownloadServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private static final int BYTES_DOWNLOAD = 1024;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         try {
-            PrintWriter out = res.getWriter();
-            String name = req.getParameter("value");
-            String path = getServletContext().getRealPath("D:\\\\5th Sem\\\\Java\\\\Shopper\" +\n" +
-                    "                    \"-JSP\\\\invoice\\" + name);
+            res.setContentType("application/pdf");
+            res.setHeader("Content-Disposition", "attachment;filename=" + req.getParameter("value"));
 
-            res.setContentType("APPLICATION/OCTET-STREAM");
-            res.setHeader("Content-Disposition", "attachment; filename=\"" + name + "\"");
+            File file = new File("D:\\projects\\Shopper-JSP\\src\\main\\webapp\\WEB-INF\\invoice\\" + req.getParameter("value"));
+            FileInputStream in = new FileInputStream(file);
 
-            FileInputStream ins = new FileInputStream(path);
+            int read = 0;
+            byte[] bytes = new byte[BYTES_DOWNLOAD];
 
-            int i;
+            OutputStream out = res.getOutputStream();
 
-            while ((i = ins.read()) != -1) {
-                out.write(i);
+            while((read = in.read(bytes))!= -1){
+                out.write(bytes, 0, read);
             }
 
-            ins.close();
+            out.flush();
             out.close();
         }
         catch (Exception e) {
