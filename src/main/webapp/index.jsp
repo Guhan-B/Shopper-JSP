@@ -7,6 +7,6 @@
     <title>Shopper | Home</title>
 </head>
 <body>
-    
+    <% response.sendRedirect("login.jsp"); %>
 </body>
 </html>

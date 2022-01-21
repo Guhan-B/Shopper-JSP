@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="srijayan"/>
+    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="Rajesh3@"/>
 
     <sql:query dataSource="${connection}" var="products">
         SELECT * from products;
@@ -42,6 +42,13 @@
         <header>
             <h2>Product Cataloge</h2>
         </header>
+
+        <% if(request.getAttribute("isError") != null && (boolean) request.getAttribute("isError")) { %>
+        <div class="error-message">
+            <p><%= request.getAttribute("errorMessage") %></p>
+        </div>
+        <% } %>
+
         <form method="post" action="purchase">
             <table id="customers">
                 <tr>

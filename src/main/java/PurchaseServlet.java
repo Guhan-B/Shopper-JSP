@@ -19,10 +19,32 @@ public class PurchaseServlet extends HttpServlet {
         ArrayList<CheckOut> products = new ArrayList<>();
 
         try {
+            req.setAttribute("isError", false);
+
             connection = Database.getConnection();
             st = connection.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM products");
 
+            CheckOut.grandTotal=0;
+
+            while(rs.next()) {
+                int productId = rs.getInt(1);
+                String productName = rs.getString(2);
+                int stock = rs.getInt(4);
+                int quantity = Integer.parseInt(req.getParameter(Integer.toString(productId)));
+
+                if (quantity > stock) {
+                    req.setAttribute("isError", true);
+                    req.setAttribute("errorMessage", "Insufficient stocks for " + productName);
+
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("catalouge.jsp");
+                    dispatcher.forward(req, res);
+
+                    return;
+                }
+            }
+
+            rs = st.executeQuery("SELECT * FROM products");
             CheckOut.grandTotal=0;
 
             while (rs.next()) {
@@ -32,11 +54,16 @@ public class PurchaseServlet extends HttpServlet {
                 int stock = rs.getInt(4);
                 int per = rs.getInt(5);
                 int quantity = Integer.parseInt(req.getParameter(Integer.toString(productId)));
-                if (quantity > stock) {
-                    throw new Exception("Stock is not sufficient");
-                } else if (quantity == 0) {
+
+                if (quantity == 0) {
                     continue;
                 } else {
+
+                    PreparedStatement statement = connection.prepareStatement("UPDATE products SET stock=? WHERE id=?");
+                    statement.setInt(1, stock-quantity);
+                    statement.setInt(2, productId);
+                    statement.execute();
+
                     double priceOfOneProduct = price / (double) per;
                     double totalPrice = priceOfOneProduct * quantity;
                     CheckOut.grandTotal += totalPrice;
