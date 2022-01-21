@@ -323,3 +323,7 @@ form .form-field {
 #admin-actions form button:hover {
   color: #036fc2;
 }
+
+.catalouge-page header .search-filter {
+  display: flex !important;
+}

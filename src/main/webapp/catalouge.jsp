@@ -20,10 +20,10 @@
 </head>
 
 <body>
-    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="Rajesh3@"/>
+    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="Guhan@2001"/>
 
     <sql:query dataSource="${connection}" var="products">
-        SELECT * from products;
+        SELECT * FROM products WHERE name LIKE "%<c:out value="${param.search.trim()}"/>%"
     </sql:query>
 
     <header class="navbar">
@@ -41,6 +41,10 @@
     <div class="catalouge-page">
         <header>
             <h2>Product Cataloge</h2>
+            <form style="display: flex; align-items: stretch; width: 40%;" method="get" action="catalouge.jsp">
+                <input type="text" name="search" required placeholder="Search Here">
+                <button class="button-primary">Search</button>
+            </form>
         </header>
 
         <% if(request.getAttribute("isError") != null && (boolean) request.getAttribute("isError")) { %>
