@@ -115,7 +115,8 @@ public class PurchaseServlet extends HttpServlet {
             }
 
             Document document = new Document();
-            File invoiceFile = File.createTempFile("shopper_invoice_", ".pdf", new File("E:\\5th sem\\Java\\Project\\Shopper-JSP\\invoice"));
+            File invoiceFile = File.createTempFile("shopper_invoice_", ".pdf", new File("D:\\5th Sem\\Java\\Shopper" +
+                    "-JSP\\invoice"));
             String invoiceName = invoiceFile.getName();
             PdfWriter.getInstance(document, new FileOutputStream(invoiceFile));
 

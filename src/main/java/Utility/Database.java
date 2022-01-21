@@ -13,7 +13,7 @@ public class Database {
 
         DriverManager.registerDriver (new com.mysql.cj.jdbc.Driver());
 
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/shopper","root", "Rajesh3@");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/shopper","root", "srijayan");
         return connection;
     }
 }

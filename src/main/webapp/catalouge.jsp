@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="Rajesh3@"/>
+    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="srijayan"/>
 
     <sql:query dataSource="${connection}" var="products">
         SELECT * FROM products WHERE name LIKE "%<c:out value="${param.search.trim()}"/>%"
@@ -37,14 +37,16 @@
             String name = request.getParameter("product-name");
             int price = Integer.parseInt(request.getParameter("product-price"));
             int stock = Integer.parseInt(request.getParameter("product-stock"));
-            Cart cart = new Cart(id, name, price, stock);
+            int per = Integer.parseInt(request.getParameter("product-per"));
+            String unit = request.getParameter("product-unit");
+            Product cart = new Product(id,price,per,unit,name,stock);
 
-            ArrayList<Cart> cartProducts;
+            ArrayList<Product> cartProducts;
             if(session.getAttribute("cartProducts") == null) {
                 cartProducts = new ArrayList<>();
                 cartProducts.add(cart);
             } else {
-                cartProducts = (ArrayList<Cart>)session.getAttribute("cartProducts");
+                cartProducts = (ArrayList<Product>)session.getAttribute("cartProducts");
                 cartProducts.add(cart);
             }
 
@@ -94,6 +96,8 @@
                             <input type="text" hidden value="${product.name}" name="product-name" />
                             <input type="number" hidden value="${product.stock}" name="product-stock" />
                             <input type="number" hidden value="${product.price}" name="product-price" />
+                            <input type="number" hidden value="${product.price}" name="product-per" />
+                            <input type="text" hidden value="${product.unit}" name="product-unit" />
                             <button class="button-primary">Add</button>
                         </form>
                     </td>

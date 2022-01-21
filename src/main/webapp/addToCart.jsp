@@ -1,5 +1,5 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="Utility.Cart" %>
+<%@ page import="Utility.Product" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 
@@ -57,13 +57,13 @@
             </tr>
                 <%
                     if(session.getAttribute("cartProducts") != null) {
-                        ArrayList<Cart> products = (ArrayList<Cart>)session.getAttribute("cartProducts");
+                        ArrayList<Product> products = (ArrayList<Product>)session.getAttribute("cartProducts");
                         for(int i=0; i<products.size(); i++) {
                             out.print("<tr>");
                             out.print("<td>" + products.get(i).id + "</td>");
                             out.print("<td>" + products.get(i).name + "</td>");
-                            out.print("<td>" + products.get(i).stock + "</td>");
-                            out.print("<td>" + products.get(i).price + "</td>");
+                            out.print("<td>" + products.get(i).stock + " " + products.get(i).unit + "</td>");
+                            out.print("<td>" + products.get(i).price + " per " + products.get(i).per + " " + products.get(i).unit + "</td>");
                             out.print("<td><input style=\"width: 100px;text-align: center;\" type=\"number\" value=\"0\" min=\"0\" name=\"" + products.get(i).id + "\"></td>");
                             out.print("</tr>");
                         }

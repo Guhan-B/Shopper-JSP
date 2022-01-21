@@ -15,7 +15,8 @@ public class DownloadServlet extends HttpServlet {
         try {
             PrintWriter out = res.getWriter();
             String name = req.getParameter("value");
-            String path = getServletContext().getRealPath("E:\\5th sem\\Java\\Project\\Shopper-JSP\\invoice\\" + name);
+            String path = getServletContext().getRealPath("D:\\\\5th Sem\\\\Java\\\\Shopper\" +\n" +
+                    "                    \"-JSP\\\\invoice\\" + name);
 
             res.setContentType("APPLICATION/OCTET-STREAM");
             res.setHeader("Content-Disposition", "attachment; filename=\"" + name + "\"");
