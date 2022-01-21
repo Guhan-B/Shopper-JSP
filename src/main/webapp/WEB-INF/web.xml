@@ -41,6 +41,14 @@
     <servlet-name>Download</servlet-name>
     <servlet-class>DownloadServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Forgot</servlet-name>
+    <servlet-class>VerifyServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Reset</servlet-name>
+    <servlet-class>ResetServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>Register</servlet-name>
@@ -77,6 +85,14 @@
   <servlet-mapping>
     <servlet-name>Download</servlet-name>
     <url-pattern>/download</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Forgot</servlet-name>
+    <url-pattern>/forgot</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Reset</servlet-name>
+    <url-pattern>/reset</url-pattern>
   </servlet-mapping>
 
 </web-app>

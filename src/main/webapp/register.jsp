@@ -37,6 +37,10 @@
                 <input required id="full-name" name="full-name" type="text">
             </div>
             <div class="form-field">
+                <label for="dob">Date of Birth</label>
+                <input type="date" required id="dob" name="dob">
+            </div>
+            <div class="form-field">
                 <label for="mobile-number">Mobile Number</label>
                 <input required id="mobile-number" name="mobile-number" type="text">
             </div>

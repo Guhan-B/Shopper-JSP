@@ -1,6 +1,8 @@
 import Utility.Database;
 import jakarta.servlet.http.*;
 import jakarta.servlet.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import java.io.IOException;
 import java.sql.*;
@@ -13,11 +15,24 @@ public class LoginServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
+
         PreparedStatement statement;
         Connection connection;
         ResultSet result;
 
         try {
+
+            MessageDigest ms = MessageDigest.getInstance("SHA-224");
+            ms.update(password.getBytes());
+            byte[] r = ms.digest();
+            StringBuilder sb = new StringBuilder();
+
+            for(byte b: r) {
+                sb.append(String.format("%02x", b));
+            }
+
+            String hashedPassword = sb.toString();
+
             connection = Database.getConnection();
             statement = connection.prepareStatement("SELECT * FROM users WHERE email = ?");;
 
@@ -30,7 +45,7 @@ public class LoginServlet extends HttpServlet {
                 int userId = result.getInt(1);
                 int userType = result.getInt(6);
 
-                if(password.equalsIgnoreCase(savedPassword)) {
+                if(hashedPassword.equalsIgnoreCase(savedPassword)) {
                     HttpSession session = req.getSession();
 
                     session.setAttribute("userId", userId);
@@ -58,7 +73,7 @@ public class LoginServlet extends HttpServlet {
                 RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");
                 dispatcher.forward(req, res);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NoSuchAlgorithmException e) {
             req.setAttribute("isError", true);
             req.setAttribute("errorMessage", "Unable to login. Try Again later");
 

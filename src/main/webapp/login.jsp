@@ -41,6 +41,7 @@
             </div>
             <button class="button-primary" type="submit">Login</button>
             <p>New customer? <a href="register.jsp">Register</a></p>
+            <p><a href="forgot.jsp">Forgot Password</a></p>
         </form>
     </div>
 </body>
