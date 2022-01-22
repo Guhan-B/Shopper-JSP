@@ -23,9 +23,7 @@
     <div class="authentication-page container">
         <form method="post" action="reset">
             <h2>Reset Password</h2>
-            <%
-                out.print("<input type='number' name='id' hidden value='" + session.getAttribute("resetPassword") + "'>");
-            %>
+            <input type='number' name='id' hidden value=<%= session.getAttribute("resetPassword") %>/>
             <div class="form-field">
                 <label for="password">Password</label>
                 <input type="password" required id="password" name="password">

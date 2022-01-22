@@ -41,7 +41,7 @@ label {
   font-weight: 600;
 }
 
-. button-primary {
+.button-primary {
    background-color: #0984e3;
   color: #ffffff;
   border: none;
@@ -328,7 +328,36 @@ form .form-field {
   display: flex !important;
 }
 
+.button-small {
+  font-size: 0.75rem;
+  padding: 0.25rem;
+  width: 80px;
+  text-transform: uppercase;
+}
 
+.grand-total {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+  justify-content: flex-end;
+}
 
-.catalogue-header{
+.grand-total .span-1 {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.grand-total .span-2 {
+  margin: 0 2.5rem 0 3rem;
+  padding: 0.6rem 1.5rem;
+  border: 1px solid rgba(116, 186, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(116, 186, 255, 0.2);
+  border-radius: 4px;
+}
+
+.redirect-form {
+  display:flex;
+  justify-content:center;
+  margin-top:4rem;
+  gap: 1rem;
 }

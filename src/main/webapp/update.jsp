@@ -26,7 +26,7 @@
 </head>
 
 <body>
-    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="srijayan"/>
+    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="Guhan@2001"/>
 
     <c:set var="productID" scope="request" value='${param.productID}' />
 
@@ -78,9 +78,7 @@
                 <label for="cost-per">Product cost for how many unit?</label>
                 <input required type="number" min="0" id="cost-per" name="cost-per" value="${product.rows[0].per}">
             </div>
-            <%
-                out.print("<input hidden type=\"text\" name=\"productID\" value=" + request.getParameter("productID") + ">");
-            %>
+            <input hidden type="text" name="productID" value=<%= request.getParameter("productID") %> />
             <div class="controls">
                 <button class="button-primary" type="reset">Clear</button>
                 <button class="button-primary" type="submit">Save</button>

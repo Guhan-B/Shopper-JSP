@@ -55,27 +55,24 @@
                 <th>Price</th>
                 <th>Quantity</th>
             </tr>
-                <%
-                    if(session.getAttribute("cartProducts") != null) {
-                        ArrayList<Product> products = (ArrayList<Product>)session.getAttribute("cartProducts");
-                        for(int i=0; i<products.size(); i++) {
-                            out.print("<tr>");
-                            out.print("<td>" + products.get(i).id + "</td>");
-                            out.print("<td>" + products.get(i).name + "</td>");
-                            out.print("<td>" + products.get(i).stock + " " + products.get(i).unit + "</td>");
-                            out.print("<td>" + products.get(i).price + " per " + products.get(i).per + " " + products.get(i).unit + "</td>");
-                            out.print("<td><input style=\"width: 100px;text-align: center;\" type=\"number\" value=\"0\" min=\"0\" name=\"" + products.get(i).id + "\"></td>");
-                            out.print("</tr>");
-                        }
-                    } else {
-                        response.sendRedirect("catalouge.jsp");
-                    }
-                %>
+            <c:if test="${sessionScope.get('cartProducts') != null}">
+                <% ArrayList<Product> products = (ArrayList<Product>)session.getAttribute("cartProducts"); %>
 
+                <% for (Product product : products) { %>
+                    <tr>
+                        <td><%= product.id %></td>
+                        <td><%= product.name %></td>
+                        <td><%= product.stock + " " + product.unit %></td>
+                        <td><%= product.price + " per " + product.per + " " + product.unit %></td>
+                        <td>
+                            <input required style="width: 100px;text-align: center;" type="number" value="0" min="0" name=<%= product.id %> >
+                        </td>
+                    </tr>
+                <% } %>
+            </c:if>
         </table>
         <button style="display: block; margin: 2rem 0 0 auto;" class="button-primary">Purchase</button>
     </form>
-
 </div>
 </body>
 

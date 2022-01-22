@@ -39,6 +39,7 @@
     <header>
         <h2>Invoice</h2>
     </header>
+
     <table id="customers">
         <tr>
             <th>Product ID</th>
@@ -46,37 +47,26 @@
             <th>Quantity</th>
             <th>Price</th>
         </tr>
+        <c:if test="${requestScope.get('products') != null}">
+            <% ArrayList<Checkout> products = (ArrayList<Checkout>) request.getAttribute("products"); %>
 
-        <%
-            if(request.getAttribute("products") != null) {
-                ArrayList<Checkout> products = (ArrayList<Checkout>)request.getAttribute("products");
-                for(int i=0; i<products.size(); i++) {
-                    out.print("<tr>");
-                    out.print("<td>" + products.get(i).productId + "</td>");
-                    out.print("<td>" + products.get(i).productName + "</td>");
-                    out.print("<td>" + products.get(i).quantity + "</td>");
-                    out.print("<td>" + Double.toString(products.get(i).price) + "</td>");
-                    out.print("</tr>");
-                }
-            }
-        %>
-
+            <% for (Checkout product : products) { %>
+                <tr>
+                    <td><%= product.productId %></td>
+                    <td><%= product.productName %></td>
+                    <td><%= product.quantity %></td>
+                    <td><%= product.price %></td>
+                </tr>
+            <% } %>
+        </c:if>
     </table>
 
-    <div class="total" style="display: flex; align-items: center; margin-top: 2rem; justify-content: flex-end">
-        <span style="font-weight: bold; font-size: 1rem">
-            Grand Total
-        </span>
-        <span style="margin: 0 2.5rem 0 3rem; padding: 0.6rem 1.5rem; border: 1px solid rgba(116, 186, 255, 0.5);
-  box-shadow: 0 0 0 3px rgba(116, 186, 255, 0.2); border-radius: 4px"; >
-
-             <%
-                 out.print("Rs. " + Checkout.grandTotal );
-             %>
-
-        </span>
+    <div class="grand-total">
+        <span class="span-1">Grand Total</span>
+        <span class="span-2">Rs. <%= request.getAttribute("total") %></span>
     </div>
-    <div style="display:flex;justify-content:center;margin-top:4rem;gap: 1rem;">
+
+    <div class="redirect-form">
         <form action="redirect">
             <button class="button-primary">Back to Home</button>
         </form>

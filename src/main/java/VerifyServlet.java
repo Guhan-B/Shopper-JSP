@@ -31,7 +31,7 @@ public class VerifyServlet extends HttpServlet {
                 if(userDob.equals(dob)){
                     HttpSession session = req.getSession();
                     session.setAttribute("resetPassword",result.getInt(1));
-                    res.sendRedirect("resetPassword.jsp");
+                    res.sendRedirect("reset.jsp");
                 }else{
                     req.setAttribute("isError", true);
                     req.setAttribute("errorMessage", "Date of Birth is Incorrect");

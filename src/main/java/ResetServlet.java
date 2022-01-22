@@ -52,7 +52,7 @@ public class ResetServlet extends HttpServlet {
                 req.setAttribute("isError", true);
                 req.setAttribute("errorMessage", "Password doesn't match");
 
-                RequestDispatcher dispatcher = req.getRequestDispatcher("resetPassword.jsp");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("reset.jsp");
                 dispatcher.forward(req, res);
             }
         } catch (SQLException | NoSuchAlgorithmException e) {
@@ -60,7 +60,7 @@ public class ResetServlet extends HttpServlet {
             req.setAttribute("isError", true);
             req.setAttribute("errorMessage", "Unable to Reset. Try Again later");
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("resetPassword.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("reset.jsp");
             dispatcher.forward(req, res);
         }
     }

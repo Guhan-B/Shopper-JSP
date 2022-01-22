@@ -1,7 +1,7 @@
 <%@ page import="Utility.Product" %>
 <%@ page import="java.util.TreeMap" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="Utility.Cart" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 
@@ -24,7 +24,7 @@
 </head>
 
 <body>
-    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="srijayan"/>
+    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="Guhan@2001"/>
 
     <sql:query dataSource="${connection}" var="products">
         SELECT * FROM products WHERE name LIKE "%<c:out value="${param.search.trim()}"/>%"
@@ -91,20 +91,6 @@
     <div class="catalouge-page">
         <header class="catalogue-header">
             <h2>Product Cataloge</h2>
-            <form style="display: flex; align-items: stretch; width: 0%;" action="catalouge.jsp" method="post">
-                <select name="filter" style="border: 1px solid #dfe6e9;border-right:none;padding:0.5rem 1rem;">
-                    <option>Product ID</option>
-                    <option>Price</option>
-                    <option>Product Name</option>
-                    <option>Pack</option>
-                    <option>Kilogram</option>
-                    <option>Gram</option>
-                    <option>Milligram</option>
-                    <option>Litre</option>
-                    <option>Millilitre</option>
-                </select>
-                <button class="button-primary">Sort</button>
-            </form>
             <form style="display: flex; align-items: stretch; width: 40%;" method="get" action="catalouge.jsp">
                 <input type="text" name="search" required placeholder="Search Here">
                 <button class="button-primary">Search</button>
@@ -141,14 +127,14 @@
                                ArrayList<Integer> ids = (ArrayList<Integer>)session.getAttribute("cartProductsId");
 
                                if(ids.contains(p.get("id"))){ %>
-                                    <button class="button-primary" style="background-color:crimson">Remove</button>
+                                    <button class="button-primary button-small" style="background-color:crimson">Remove</button>
                                <% }
                                else { %>
-                                    <button class="button-primary">Add</button>
+                                    <button class="button-primary button-small">Add</button>
                                <% }
                                }
                                else{ %>
-                                    <button class="button-primary">Add</button>
+                                    <button class="button-primary button-small">Add</button>
                                <% }
                             %>
 
