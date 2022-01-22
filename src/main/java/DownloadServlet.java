@@ -15,7 +15,9 @@ public class DownloadServlet extends HttpServlet {
             res.setContentType("application/pdf");
             res.setHeader("Content-Disposition", "attachment;filename=" + req.getParameter("value"));
 
-            File file = new File("D:\\projects\\Shopper-JSP\\src\\main\\webapp\\WEB-INF\\invoice\\" + req.getParameter("value"));
+            File file =
+                    new File("D:\\5th Sem\\Java\\Shopper-JSP\\src\\main\\webapp\\WEB-INF\\invoice\\"
+                            + req.getParameter("value"));
             FileInputStream in = new FileInputStream(file);
 
             int read = 0;

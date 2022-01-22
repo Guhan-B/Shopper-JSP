@@ -1,4 +1,5 @@
 <%@ page import="Utility.Product" %>
+<%@ page import="java.util.TreeMap" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Utility.Cart" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -42,15 +43,36 @@
             Product cart = new Product(id,price,per,unit,name,stock);
 
             ArrayList<Product> cartProducts;
-            if(session.getAttribute("cartProducts") == null) {
+            ArrayList<Integer> cartProductsId;
+            if(session.getAttribute("cartProducts") == null && session.getAttribute("cartProductsId") == null) {
                 cartProducts = new ArrayList<>();
+                cartProductsId = new ArrayList<>();
                 cartProducts.add(cart);
+                cartProductsId.add(id);
             } else {
                 cartProducts = (ArrayList<Product>)session.getAttribute("cartProducts");
-                cartProducts.add(cart);
-            }
+                cartProductsId = (ArrayList<Integer>)session.getAttribute("cartProductsId");
 
+                if(cartProductsId.contains(id)){
+                    for(Product p:cartProducts){
+                        if(p.id==id){
+                            cartProducts.remove(p);
+                            break;
+                        }
+                    }
+                    cartProductsId.remove((Integer)id);
+                }
+                else{
+                    cartProducts.add(cart);
+                    cartProductsId.add(id);
+                }
+            }
+            for(Product i:cartProducts){
+                System.out.print(i.id + ",");
+            }
+            System.out.println("end");
             session.setAttribute("cartProducts", cartProducts);
+            session.setAttribute("cartProductsId",cartProductsId);
         }
     %>
 
@@ -67,8 +89,22 @@
         </form>
     </header>
     <div class="catalouge-page">
-        <header>
+        <header class="catalogue-header">
             <h2>Product Cataloge</h2>
+            <form style="display: flex; align-items: stretch; width: 0%;" action="catalouge.jsp" method="post">
+                <select name="filter" style="border: 1px solid #dfe6e9;border-right:none;padding:0.5rem 1rem;">
+                    <option>Product ID</option>
+                    <option>Price</option>
+                    <option>Product Name</option>
+                    <option>Pack</option>
+                    <option>Kilogram</option>
+                    <option>Gram</option>
+                    <option>Milligram</option>
+                    <option>Litre</option>
+                    <option>Millilitre</option>
+                </select>
+                <button class="button-primary">Sort</button>
+            </form>
             <form style="display: flex; align-items: stretch; width: 40%;" method="get" action="catalouge.jsp">
                 <input type="text" name="search" required placeholder="Search Here">
                 <button class="button-primary">Search</button>
@@ -98,7 +134,24 @@
                             <input type="number" hidden value="${product.price}" name="product-price" />
                             <input type="number" hidden value="${product.price}" name="product-per" />
                             <input type="text" hidden value="${product.unit}" name="product-unit" />
-                            <button class="button-primary">Add</button>
+
+                            <%
+                               if(session.getAttribute("cartProductsId") != null) {
+                               TreeMap p = (TreeMap)pageContext.getAttribute("product");
+                               ArrayList<Integer> ids = (ArrayList<Integer>)session.getAttribute("cartProductsId");
+
+                               if(ids.contains(p.get("id"))){ %>
+                                    <button class="button-primary" style="background-color:crimson">Remove</button>
+                               <% }
+                               else { %>
+                                    <button class="button-primary">Add</button>
+                               <% }
+                               }
+                               else{ %>
+                                    <button class="button-primary">Add</button>
+                               <% }
+                            %>
+
                         </form>
                     </td>
                 </tr>

@@ -8,21 +8,22 @@ import jakarta.servlet.*;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
 
 public class PurchaseServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private void addTableHeader(PdfPTable table) {
-        Stream.of("Product ID", "Product Name", "Product Quantity", "Product Price")
-                .forEach(columnTitle -> {
-                    PdfPCell header = new PdfPCell();
-                    header.setBackgroundColor(BaseColor.LIGHT_GRAY);
-                    header.setBorderWidth(1);
-                    header.setPhrase(new Phrase(columnTitle));
-                    table.addCell(header);
-                });
+
+        String[] titles = {"Product ID", "Product Name", "Product Quantity", "Product Price"};
+
+        for(String title : titles) {
+            PdfPCell header = new PdfPCell();
+            header.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            header.setBorderWidth(1);
+            header.setPhrase(new Phrase(title));
+            table.addCell(header);
+        }
     }
 
     private void addRows(PdfPTable table, ArrayList<Checkout> data) {
@@ -115,7 +116,7 @@ public class PurchaseServlet extends HttpServlet {
             }
 
             Document document = new Document();
-            File invoiceFile = File.createTempFile("shopper_invoice_", ".pdf", new File("D:\\projects\\Shopper-JSP\\src\\main\\webapp\\WEB-INF\\invoice"));
+            File invoiceFile = File.createTempFile("shopper_invoice_", ".pdf", new File("D:\\5th Sem\\Java\\Shopper-JSP\\src\\main\\webapp\\WEB-INF\\invoice"));
             String invoiceName = invoiceFile.getName();
             PdfWriter.getInstance(document, new FileOutputStream(invoiceFile));
 

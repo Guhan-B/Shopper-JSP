@@ -41,8 +41,8 @@ label {
   font-weight: 600;
 }
 
-.button-primary {
-  background-color: #0984e3;
+. button-primary {
+   background-color: #0984e3;
   color: #ffffff;
   border: none;
   outline: none;
@@ -326,4 +326,9 @@ form .form-field {
 
 .catalouge-page header .search-filter {
   display: flex !important;
+}
+
+
+
+.catalogue-header{
 }
