@@ -37,15 +37,6 @@
 
     <header class="navbar">
         <h2>Shopper</h2>
-        <form class="nav" method="post" action="logout">
-            <a href="#" class="profile">
-                <i class="far fa-user"></i>
-            </a>
-            <button type="submit" class="logout">
-                <p>Logout</p>
-                <i class="fas fa-sign-out-alt"></i>
-            </button>
-        </form>
     </header>
     <div class="add-page container">
         <form method="post" action="update">

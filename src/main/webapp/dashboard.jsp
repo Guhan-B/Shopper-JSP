@@ -43,6 +43,7 @@
         <a href="#" class="profile">
             <i class="far fa-user"></i>
         </a>
+        <a href="history.jsp" style="color: #FFFFFF; text-decoration: none; font-weight: bold">History</a>
         <button type="submit" class="logout">
             <p>Logout</p>
             <i class="fas fa-sign-out-alt"></i>

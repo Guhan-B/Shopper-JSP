@@ -30,6 +30,10 @@
         SELECT * FROM products WHERE name LIKE "%<c:out value="${param.search.trim()}"/>%"
     </sql:query>
 
+    <sql:query dataSource="${connection}" var="user">
+        SELECT fullName FROM users WHERE id = <c:out value="${sessionScope.get('userId')}"/>;
+    </sql:query>
+
     <%
         if(request.getParameter("product-id") != null || request.getParameter("product-name") != null ||
                 request.getParameter("product-price") != null || request.getParameter("product-stock") != null) {
@@ -82,6 +86,7 @@
             <a href="#" class="profile">
                 <i class="far fa-user"></i>
             </a>
+            <a href="history.jsp" style="color: #FFFFFF; text-decoration: none; font-weight: bold">History</a>
             <button type="submit" class="logout">
                 <p>Logout</p>
                 <i class="fas fa-sign-out-alt"></i>
@@ -89,6 +94,7 @@
         </form>
     </header>
     <div class="catalouge-page">
+        <h1 style="text-align: center; margin-bottom: 4rem;">Welcome Back ! ... <c:out value="${user.rows[0].fullName}"/></h1>
         <header class="catalogue-header">
             <h2>Product Cataloge</h2>
             <form style="display: flex; align-items: stretch; width: 40%;" method="get" action="catalouge.jsp">

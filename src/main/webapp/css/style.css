@@ -361,3 +361,48 @@ form .form-field {
   margin-top:4rem;
   gap: 1rem;
 }
+
+.splash-screen {
+  background: #0984e3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.splash-screen h1 {
+  color: #FFFFFF;
+  font-family: Pacifico;
+  font-size: 4rem;
+  margin-bottom: 4rem;
+}
+
+.splash-screen div {
+  display: flex;
+  gap: 2rem;
+}
+
+.splash-screen div a {
+  background: #FFFFFF;
+  color: #0984e3;
+  width: 150px;
+  text-align: center;
+}
+
+.profile {
+  position: relative;
+}
+
+.profile .menu {
+  position: absolute;
+  bottom: -100px;
+  left: 50%;
+  background-color: red;
+  padding: 1rem;
+}
+
+.profile .menu * {
+  display: block;
+}

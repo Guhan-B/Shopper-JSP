@@ -9,11 +9,11 @@
 </head>
 <body>
 
-<div class="splash-screen" style="background: #0984e3; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100vw; height: 100vh;">
-    <h1 style="color: #FFFFFF; font-family: Pacifico;font-size: 4rem;margin-bottom: 4rem;">Welcome to Shopper</h1>
-    <div style="display: flex; gap: 2rem">
-        <a class="button-primary" style="background: #FFFFFF; color: #0984e3; width: 150px; text-align: center;" href="register.jsp">Register</a>
-        <a class="button-primary" style="background: #FFFFFF; color: #0984e3; width: 150px; text-align: center;" href="login.jsp">Login</a>
+<div class="splash-screen">
+    <h1>Welcome to Shopper</h1>
+    <div>
+        <a class="button-primary" href="register.jsp">Register</a>
+        <a class="button-primary" href="login.jsp">Login</a>
     </div>
 </div>
 
