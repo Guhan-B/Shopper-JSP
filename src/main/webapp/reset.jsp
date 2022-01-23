@@ -10,10 +10,9 @@
 </head>
 
 <body>
-    <% if(session.getAttribute("resetPassword") == null)
-        response.sendRedirect("login.jsp");
-       else
-        System.out.println(session.getAttribute("resetPassword"));
+    <%
+        if(session.getAttribute("resetPassword") == null)
+            response.sendRedirect("login.jsp");
     %>
 
     <% if(request.getAttribute("isError") != null && (boolean) request.getAttribute("isError")) { %>

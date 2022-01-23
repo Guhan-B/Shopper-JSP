@@ -1,5 +1,4 @@
 <%@ page import="Utility.Product" %>
-<%@ page import="Utility.Variables" %>
 <%@ page import="java.util.TreeMap" %>
 <%@ page import="java.util.ArrayList" %>
 
@@ -25,7 +24,7 @@
 </head>
 
 <body>
-    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="srijayan"/>
+    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="<%=Utility.Variables.SqlUrl%>" user="root" password="<%=Utility.Variables.SqlPassword%>"/>
 
     <sql:query dataSource="${connection}" var="products">
         SELECT * FROM products WHERE name LIKE "%<c:out value="${param.search.trim()}"/>%"
@@ -72,10 +71,7 @@
                     cartProductsId.add(id);
                 }
             }
-            for(Product i:cartProducts){
-                System.out.print(i.id + ",");
-            }
-            System.out.println("end");
+
             session.setAttribute("cartProducts", cartProducts);
             session.setAttribute("cartProductsId",cartProductsId);
         }
@@ -84,7 +80,7 @@
     <header class="navbar">
         <h2>Shopper</h2>
         <form class="nav" method="post" action="logout">
-            <a href="#" class="profile">
+            <a href="profile.jsp" class="profile">
                 <i class="far fa-user"></i>
             </a>
             <a href="history.jsp" style="color: #FFFFFF; text-decoration: none; font-weight: bold">History</a>
@@ -150,7 +146,9 @@
                 </tr>
             </c:forEach>
         </table>
-
+        <c:if test="${products.rowCount == 0}">
+            <p style="margin: 2rem 0;text-align: center;font-size: 1.15rem;font-weight: bold;">Product not found</p>
+        </c:if>
         <div class="purchase-form">
             <form action="cart.jsp">
                 <button class="button-primary">Go to Cart</button>

@@ -49,6 +49,10 @@
     <servlet-name>Reset</servlet-name>
     <servlet-class>ResetServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Profile</servlet-name>
+    <servlet-class>ProfileServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>Register</servlet-name>
@@ -94,5 +98,8 @@
     <servlet-name>Reset</servlet-name>
     <url-pattern>/reset</url-pattern>
   </servlet-mapping>
-
+  <servlet-mapping>
+    <servlet-name>Profile</servlet-name>
+    <url-pattern>/profile</url-pattern>
+  </servlet-mapping>
 </web-app>

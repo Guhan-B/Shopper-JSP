@@ -27,7 +27,7 @@
 </head>
 
 <body>
-    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="srijayan"/>
+<sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="<%=Utility.Variables.SqlUrl%>" user="root" password="<%=Utility.Variables.SqlPassword%>"/>
 
     <c:set var="productID" scope="request" value='${param.productID}' />
 

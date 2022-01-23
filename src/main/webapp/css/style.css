@@ -229,7 +229,7 @@ form .form-field {
 
 .admin-page .admin-center {
   padding: 2rem;
-  background-color: #dfe6e9;
+  background-color: #ededed;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -255,7 +255,7 @@ form .form-field {
 
 .add-page form {
   width: 500px;
-  background-color: #dfe6e9;
+  background-color: #ededed;
   padding: 2rem;
   border-radius: 2px;
   display: flex;
@@ -405,4 +405,8 @@ form .form-field {
 
 .profile .menu * {
   display: block;
+}
+
+.splash-screen div a:hover {
+  background-color: #dfe6e9;
 }
