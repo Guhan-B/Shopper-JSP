@@ -12,6 +12,8 @@
 <body>
     <% if(session.getAttribute("resetPassword") == null)
         response.sendRedirect("login.jsp");
+       else
+        System.out.println(session.getAttribute("resetPassword"));
     %>
 
     <% if(request.getAttribute("isError") != null && (boolean) request.getAttribute("isError")) { %>
@@ -23,7 +25,7 @@
     <div class="authentication-page container">
         <form method="post" action="reset">
             <h2>Reset Password</h2>
-            <input type='number' name='id' hidden value=<%= session.getAttribute("resetPassword") %>/>
+            <input type='number' name='id' hidden value="${sessionScope.get('resetPassword')}"/>
             <div class="form-field">
                 <label for="password">Password</label>
                 <input type="password" required id="password" name="password">

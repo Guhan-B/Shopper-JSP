@@ -20,7 +20,7 @@
 </head>
 
 <body>
-<sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="Guhan@2001"/>
+<sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="srijayan"/>
 
 <c:choose>
     <c:when test="${sessionScope.get('userType') == 1}">
@@ -80,6 +80,14 @@
             </tr>
         </c:forEach>
     </table>
+    <c:choose>
+        <c:when test="${sessionScope.get('userType') == 1}">
+            <a href="dashboard.jsp" style="display:block;width:fit-content;margin: 2rem 0 0 auto;" class="button-primary">Back to Home</a>
+        </c:when>
+        <c:when test="${sessionScope.get('userType') == 0}">
+            <a href="catalouge.jsp" style="display:block;width:fit-content;margin: 2rem 0 0 auto;" class="button-primary">Back to Home</a>
+        </c:when>
+    </c:choose>
 </div>
 </body>
 

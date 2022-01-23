@@ -1,5 +1,6 @@
 import Utility.Checkout;
 import Utility.Database;
+import Utility.Variables;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import jakarta.servlet.http.*;
@@ -36,7 +37,7 @@ public class PurchaseServlet extends HttpServlet {
 
     private String generateInvoice(ArrayList<Checkout> products, double grandTotal) throws IOException, DocumentException {
         Document document = new Document();
-        File invoiceFile = File.createTempFile("shopper_invoice_", ".pdf", new File("D:\\projects\\Shopper-JSP\\src\\main\\webapp\\WEB-INF\\invoice"));
+        File invoiceFile = File.createTempFile("shopper_invoice_", ".pdf", new File(Variables.invoicePath));
         String invoiceName = invoiceFile.getName();
         PdfWriter.getInstance(document, new FileOutputStream(invoiceFile));
 
@@ -140,6 +141,7 @@ public class PurchaseServlet extends HttpServlet {
             }
 
             session.removeAttribute("cartProducts");
+            session.removeAttribute("cartProductsId");
 
             String invoiceName = generateInvoice(products, grandTotal);
             Date now = new Date(System.currentTimeMillis());

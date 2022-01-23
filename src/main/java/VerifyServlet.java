@@ -19,7 +19,7 @@ public class VerifyServlet extends HttpServlet {
 
         try {
             connection = Database.getConnection();
-            statement = connection.prepareStatement("SELECT * FROM users where email = ?");;
+            statement = connection.prepareStatement("SELECT * FROM users where email = ?");
 
             statement.setString(1, userEmail);
 

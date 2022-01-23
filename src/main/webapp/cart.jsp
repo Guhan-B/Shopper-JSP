@@ -62,7 +62,18 @@
                 <% } %>
             </c:if>
         </table>
-        <button style="display: block; margin: 2rem 0 0 auto;" class="button-primary">Purchase</button>
+
+        <% if(session.getAttribute("cartProducts") == null || ((ArrayList<Product>)(session.getAttribute("cartProducts"))).size()==0) { %>
+            <p style="font-size:1.25rem;margin: 1.5rem 0;text-align:center;">There is no products in your cart!</p>
+        <% } %>
+        <div style="display:flex;justify-content:flex-end;">
+            <a href="catalouge.jsp" style="margin: 2rem 1rem 0 0;" class="button-primary">Back to Home</a>
+            <% if(session.getAttribute("cartProducts") != null && ((ArrayList<Product>)(session.getAttribute("cartProducts"))).size()!=0) { %>
+                    <button style="margin: 2rem 0 0 0;" class="button-primary">Purchase</button>
+            <% } %>
+
+        </div>
+
     </form>
 </div>
 </body>

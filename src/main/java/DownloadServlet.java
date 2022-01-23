@@ -1,3 +1,4 @@
+import Utility.Variables;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ public class DownloadServlet extends HttpServlet {
             res.setHeader("Content-Disposition", "attachment;filename=" + req.getParameter("value"));
 
             File file =
-                    new File("D:\\projects\\Shopper-JSP\\src\\main\\webapp\\WEB-INF\\invoice\\"
+                    new File(Variables.invoicePath + "\\"
                             + req.getParameter("value"));
             FileInputStream in = new FileInputStream(file);
 

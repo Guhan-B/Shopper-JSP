@@ -1,4 +1,5 @@
 <%@ page import="Utility.Product" %>
+<%@ page import="Utility.Variables" %>
 <%@ page import="java.util.TreeMap" %>
 <%@ page import="java.util.ArrayList" %>
 
@@ -24,7 +25,7 @@
 </head>
 
 <body>
-    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="Guhan@2001"/>
+    <sql:setDataSource var="connection" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/shopper" user="root" password="srijayan"/>
 
     <sql:query dataSource="${connection}" var="products">
         SELECT * FROM products WHERE name LIKE "%<c:out value="${param.search.trim()}"/>%"
@@ -124,7 +125,7 @@
                             <input type="text" hidden value="${product.name}" name="product-name" />
                             <input type="number" hidden value="${product.stock}" name="product-stock" />
                             <input type="number" hidden value="${product.price}" name="product-price" />
-                            <input type="number" hidden value="${product.price}" name="product-per" />
+                            <input type="number" hidden value="${product.per}" name="product-per" />
                             <input type="text" hidden value="${product.unit}" name="product-unit" />
 
                             <%
